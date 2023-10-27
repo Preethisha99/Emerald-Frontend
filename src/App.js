@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Home from "./Components/Home";
+import Footer from "./Components/Layouts/Footer";
+import Header from "./Components/Layouts/Header";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //React Router Set-Up
+import { HelmetProvider } from "react-helmet-async";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import ProductDetails from "./Components/Product/ProductDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <HelmetProvider>
+            <Header />
+            <div className="container container-fluid">
+                <ToastContainer theme="dark"/>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/product/:id" element={<ProductDetails/>}/>
+                </Routes>
+            </div>
+            <Footer />
+        </HelmetProvider>
+      </div>
+    </Router>
   );
 }
 
